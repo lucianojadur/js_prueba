@@ -69,11 +69,17 @@ function Ball(size){
 	}
 
 	//setters
+	this.setVx = function(vx){
+		_vx = vx;
+	}
+
+	this.setVy = function(vy){
+		_vy = vy;
+	}
+
 	this.initVelocity = function(vx, vy){
-		if (vx != 0) 
-			_vx = vx / FPS;
-		if (vy != 0)
-			_vy = vy / FPS;
+		_vx = vx / FPS;
+		_vy = vy / FPS;
 		if (vx == 0 && vy == 0){
 			_vx = (Math.random() * 10 + 50) / FPS;
 			_vy = (Math.random() * 10 + 50) / FPS;
@@ -127,15 +133,29 @@ function consoleMessages(){
 	console.log("|vy| = " + Math.abs(ball.vy()) * FPS + " pps");
 }
 
-function main(vx, vy) {
-	vx = document.getElementById("user_vx").value;
-	vy = document.getElementById("user_vy").value;
-	document.getElementById("user_vx").value = "";
-	document.getElementById("user_vy").value = "";
+function start(vx, vy){
+	try {
+		vx = document.getElementById("user_vx").value;
+		document.getElementById("user_vx").value = "";
+	}
+	catch (typeError){}
+	try {
+		vy = document.getElementById("user_vy").value;
+		document.getElementById("user_vy").value = "";
+	}
+	catch (typeError) {}
+	console.log("los valores leídos inicialmente de vx y vy son " + vx + " y " + vy);
 	ball.initVelocity(vx, vy);
-	consoleMessages();
+}
 
+function run(vx=0, vy=0){
+	start(vx, vy);
+	consoleMessages();
 	setInterval(mainUpdate, 1000 / FPS); 
+}
+
+function main() {
+	run();
 }
 
 main();
