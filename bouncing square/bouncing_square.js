@@ -144,7 +144,6 @@ function start(vx, vy){
 		document.getElementById("user_vy").value = "";
 	}
 	catch (typeError) {}
-	console.log("los valores leídos inicialmente de vx y vy son " + vx + " y " + vy);
 	ball.initVelocity(vx, vy);
 }
 
